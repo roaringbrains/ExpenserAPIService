@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ExpenseManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Expense_Category">
+          <Key>
+            <PropertyRef Name="ExpenseCategory" />
+            <PropertyRef Name="ExpenseSubCategory" />
+          </Key>
+          <Property Name="ExpenseCategory" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="ExpenseSubCategory" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="ExpenseName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChangeDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ChangeId" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Income_Category">
+          <Key>
+            <PropertyRef Name="IncomeCategoryId" />
+            <PropertyRef Name="SourceName" />
+          </Key>
+          <Property Name="IncomeCategoryId" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="SourceName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChangeDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ChangeId" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Income_Source">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="IncomeCategoryId" />
+            <PropertyRef Name="IncomeReceivedOn" />
+          </Key>
+          <Property Name="UserId" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="IncomeCategoryId" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="IncomeReceivedOn" Type="datetime" Nullable="false" />
+          <Property Name="Income" Type="numeric" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="ChangeDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ChangeId" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="ChangeDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ChangeId" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Credential">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="DefaultPassword" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ChangeDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Expense_Details">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ExpenseUniqueId" />
+            <PropertyRef Name="ExpenseAmout" />
+            <PropertyRef Name="ExpenseDate" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ExpenseUniqueId" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="ExpenseCategory" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="ExpenseSubCategory" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="ExpenseAmout" Type="numeric" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="ExpenseDate" Type="datetime" Nullable="false" />
+          <Property Name="ChangeDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ChangeId" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Mobile">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Mobile" />
+          </Key>
+          <Property Name="UserId" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Mobile" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CountryCode" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="Prefix" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ChangeDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ChangeId" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ExpenseManagerModelStoreContainer">
+          <EntitySet Name="Expense_Category" EntityType="Self.Expense_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Income_Category" EntityType="Self.Income_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Income_Source" EntityType="Self.Income_Source" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Credential" EntityType="Self.User_Credential" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Expense_Details" EntityType="Self.User_Expense_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Mobile" EntityType="Self.User_Mobile" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ExpenseManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Expense_Category">
+          <Key>
+            <PropertyRef Name="ExpenseCategory" />
+            <PropertyRef Name="ExpenseSubCategory" />
+          </Key>
+          <Property Name="ExpenseCategory" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="ExpenseSubCategory" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="ExpenseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChangeDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ChangeId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Income_Category">
+          <Key>
+            <PropertyRef Name="IncomeCategoryId" />
+            <PropertyRef Name="SourceName" />
+          </Key>
+          <Property Name="IncomeCategoryId" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="SourceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChangeDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ChangeId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Income_Source">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="IncomeCategoryId" />
+            <PropertyRef Name="IncomeReceivedOn" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IncomeCategoryId" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="IncomeReceivedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Income" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="ChangeDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ChangeId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChangeDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ChangeId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Credential">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DefaultPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChangeDateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="User_Expense_Details">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ExpenseUniqueId" />
+            <PropertyRef Name="ExpenseAmout" />
+            <PropertyRef Name="ExpenseDate" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExpenseUniqueId" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="ExpenseCategory" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="ExpenseSubCategory" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="ExpenseAmout" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="ExpenseDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ChangeDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ChangeId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Mobile">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Mobile" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Mobile" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CountryCode" Type="Decimal" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="Prefix" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ChangeDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ChangeId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ExpenseManagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Expense_Category" EntityType="Self.Expense_Category" />
+          <EntitySet Name="Income_Category" EntityType="Self.Income_Category" />
+          <EntitySet Name="Income_Source" EntityType="Self.Income_Source" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="User_Credential" EntityType="Self.User_Credential" />
+          <EntitySet Name="User_Expense_Details" EntityType="Self.User_Expense_Details" />
+          <EntitySet Name="User_Mobile" EntityType="Self.User_Mobile" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ExpenseManagerModelStoreContainer" CdmEntityContainer="ExpenseManagerEntities">
+          <EntitySetMapping Name="Expense_Category">
+            <EntityTypeMapping TypeName="ExpenseManagerModel.Expense_Category">
+              <MappingFragment StoreEntitySet="Expense_Category">
+                <ScalarProperty Name="ExpenseCategory" ColumnName="ExpenseCategory" />
+                <ScalarProperty Name="ExpenseSubCategory" ColumnName="ExpenseSubCategory" />
+                <ScalarProperty Name="ExpenseName" ColumnName="ExpenseName" />
+                <ScalarProperty Name="ChangeDateTime" ColumnName="ChangeDateTime" />
+                <ScalarProperty Name="ChangeId" ColumnName="ChangeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Income_Category">
+            <EntityTypeMapping TypeName="ExpenseManagerModel.Income_Category">
+              <MappingFragment StoreEntitySet="Income_Category">
+                <ScalarProperty Name="IncomeCategoryId" ColumnName="IncomeCategoryId" />
+                <ScalarProperty Name="SourceName" ColumnName="SourceName" />
+                <ScalarProperty Name="ChangeDateTime" ColumnName="ChangeDateTime" />
+                <ScalarProperty Name="ChangeId" ColumnName="ChangeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Income_Source">
+            <EntityTypeMapping TypeName="ExpenseManagerModel.Income_Source">
+              <MappingFragment StoreEntitySet="Income_Source">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IncomeCategoryId" ColumnName="IncomeCategoryId" />
+                <ScalarProperty Name="IncomeReceivedOn" ColumnName="IncomeReceivedOn" />
+                <ScalarProperty Name="Income" ColumnName="Income" />
+                <ScalarProperty Name="ChangeDateTime" ColumnName="ChangeDateTime" />
+                <ScalarProperty Name="ChangeId" ColumnName="ChangeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ExpenseManagerModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ChangeDateTime" ColumnName="ChangeDateTime" />
+                <ScalarProperty Name="ChangeId" ColumnName="ChangeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Credential">
+            <EntityTypeMapping TypeName="ExpenseManagerModel.User_Credential">
+              <MappingFragment StoreEntitySet="User_Credential">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DefaultPassword" ColumnName="DefaultPassword" />
+                <ScalarProperty Name="ChangeDateTime" ColumnName="ChangeDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Expense_Details">
+            <EntityTypeMapping TypeName="ExpenseManagerModel.User_Expense_Details">
+              <MappingFragment StoreEntitySet="User_Expense_Details">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ExpenseUniqueId" ColumnName="ExpenseUniqueId" />
+                <ScalarProperty Name="ExpenseCategory" ColumnName="ExpenseCategory" />
+                <ScalarProperty Name="ExpenseSubCategory" ColumnName="ExpenseSubCategory" />
+                <ScalarProperty Name="ExpenseAmout" ColumnName="ExpenseAmout" />
+                <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
+                <ScalarProperty Name="ChangeDateTime" ColumnName="ChangeDateTime" />
+                <ScalarProperty Name="ChangeId" ColumnName="ChangeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Mobile">
+            <EntityTypeMapping TypeName="ExpenseManagerModel.User_Mobile">
+              <MappingFragment StoreEntitySet="User_Mobile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+                <ScalarProperty Name="ChangeDateTime" ColumnName="ChangeDateTime" />
+                <ScalarProperty Name="ChangeId" ColumnName="ChangeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
